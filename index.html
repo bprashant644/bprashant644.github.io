@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prashant Singh Baghel — Security & Open Source Consultant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1A3C5E;
+    --teal: #0D7B6E;
+    --accent: #0D7B6E;
+    --ink: #1A1A1A;
+    --mid: #555;
+    --soft: #888;
+    --rule: #E2E5EA;
+    --bg: #FAFAF8;
+    --white: #FFFFFF;
+    --card: #F5F5F2;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 60px;
+  }
+
+  .nav-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--navy);
+    letter-spacing: -0.3px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--mid);
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--navy);
+    background: var(--card);
+  }
+
+  /* SECTIONS */
+  section {
+    display: none;
+    min-height: 100vh;
+    padding: 100px 48px 80px;
+    max-width: 900px;
+    margin: 0 auto;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  section.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* TYPOGRAPHY */
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.1;
+    color: var(--navy);
+    letter-spacing: -1px;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--navy);
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+  }
+
+  h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  h4 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 32px;
+  }
+
+  p { color: var(--mid); margin-bottom: 16px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* DIVIDER */
+  .rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 40px 0;
+  }
+
+  /* TAG / PILL */
+  .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    background: #EBF5F3;
+    border-radius: 4px;
+    padding: 3px 8px;
+    margin: 3px 3px 3px 0;
+  }
+
+  .tag.navy {
+    color: var(--navy);
+    background: #E8EEF4;
+  }
+
+  /* ========== HOME ========== */
+  .home-hero {
+    padding-top: 60px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .home-photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--rule);
+    margin-top: 8px;
+  }
+
+  .home-intro { margin: 20px 0 28px; font-size: 17px; line-height: 1.7; }
+
+  .contact-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .contact-bar a {
+    font-size: 14px;
+    color: var(--mid);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+
+  .contact-bar a:hover { color: var(--teal); }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .expertise-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 20px 24px;
+    transition: border-color 0.2s;
+  }
+
+  .expertise-card:hover { border-color: var(--teal); }
+
+  .expertise-card .icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .expertise-card h3 { font-size: 15px; margin-bottom: 6px; }
+  .expertise-card p { font-size: 14px; margin: 0; }
+
+  /* ========== EXPERIENCE ========== */
+  .exp-item {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .exp-company { font-size: 18px; font-weight: 600; color: var(--navy); }
+  .exp-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--soft);
+  }
+
+  .exp-title {
+    font-size: 14px;
+    color: var(--teal);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    padding: 0;
+  }
+
+  .exp-bullets li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 14.5px;
+    color: var(--mid);
+    margin-bottom: 9px;
+    line-height: 1.6;
+  }
+
+  .exp-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+
+  /* SKILLS GRID */
+  .skills-section { margin-top: 48px; }
+
+  .skill-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14px;
+    align-items: baseline;
+  }
+
+  .skill-row:last-child { border-bottom: none; }
+
+  .skill-label {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 13px;
+  }
+
+  .skill-value { color: var(--mid); }
+
+  /* ========== PROJECTS ========== */
+  .projects-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 28px 32px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--teal);
+    border-radius: 3px 0 0 3px;
+  }
+
+  .project-card.navy::before { background: var(--navy); }
+
+  .project-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  .project-card.navy:hover { border-color: var(--navy); }
+
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .project-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--soft);
+  }
+
+  .project-card h3 { font-size: 18px; margin-bottom: 8px; }
+  .project-card p { font-size: 14px; }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--teal);
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+
+  .project-link:hover { gap: 10px; }
+
+  /* ========== STARTUP ========== */
+  .startup-hero {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 48px;
+    color: white;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .startup-hero::after {
+    content: 'VERT';
+    position: absolute;
+    right: -20px;
+    bottom: -40px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.04);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .startup-hero h2 {
+    color: white;
+    font-size: 36px;
+    margin-bottom: 8px;
+  }
+
+  .startup-hero .tagline {
+    color: rgba(255,255,255,0.6);
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+
+  .startup-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.85);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-top: 20px;
+  }
+
+  .startup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 20px 24px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--navy);
+    display: block;
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--soft);
+    margin: 0;
+  }
+
+  .video-embed {
+    background: var(--ink);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 32px 0;
+    aspect-ratio: 16/9;
+  }
+
+  .video-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--rule);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 7px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--teal);
+    border: 2px solid var(--bg);
+  }
+
+  .timeline-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--teal);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .timeline-item h3 { font-size: 15px; margin-bottom: 4px; }
+  .timeline-item p { font-size: 14px; margin: 0; }
+
+  .callout {
+    background: #EBF5F3;
+    border-left: 3px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14px;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  /* ========== CONTACT ========== */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .contact-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 24px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.2s;
+    display: block;
+  }
+
+  .contact-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  }
+
+  .contact-card .icon { font-size: 24px; margin-bottom: 12px; display: block; }
+  .contact-card h3 { font-size: 15px; margin-bottom: 4px; }
+  .contact-card p { font-size: 13px; margin: 0; }
+
+  .contact-note {
+    margin-top: 48px;
+    padding: 32px;
+    background: var(--navy);
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+  }
+
+  .contact-note h2 { color: white; margin-bottom: 12px; }
+  .contact-note p { color: rgba(255,255,255,0.65); margin: 0; }
+
+  /* ========== COLLAPSIBLE ========== */
+  .collapsible {
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .collapsible:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
+
+  .collapsible-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 28px;
+    cursor: pointer;
+    background: var(--white);
+    user-select: none;
+    gap: 16px;
+  }
+
+  .collapsible-header:hover { background: #FAFAF8; }
+
+  .collapsible-left { flex: 1; min-width: 0; }
+
+  .collapsible-company {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .collapsible-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .collapsible-title {
+    font-size: 13px;
+    color: var(--teal);
+    font-weight: 500;
+  }
+
+  .collapsible-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--soft);
+  }
+
+  .collapsible-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .chevron {
+    width: 20px;
+    height: 20px;
+    color: var(--soft);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .collapsible.open .chevron { transform: rotate(180deg); }
+
+  .collapsible-body {
+    display: none;
+    padding: 0 28px 24px;
+    background: var(--white);
+    border-top: 1px solid var(--rule);
+  }
+
+  .collapsible.open .collapsible-body { display: block; }
+
+  .collapsible-body ul {
+    list-style: none;
+    padding: 20px 0 0;
+  }
+
+  .collapsible-body ul li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 14.5px;
+    color: var(--mid);
+    margin-bottom: 9px;
+    line-height: 1.6;
+  }
+
+  .collapsible-body ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+
+  .collapsible-body ul li.navy-dot::before { background: var(--navy); }
+
+  .section-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--soft);
+    font-weight: 600;
+    margin: 36px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  @media (max-width: 680px) {
+    nav { padding: 0 20px; }
+    .nav-brand { display: none; }
+    section { padding: 90px 20px 60px; }
+    .home-hero { grid-template-columns: 1fr; }
+    .home-photo { width: 90px; height: 90px; }
+    .expertise-grid, .startup-grid, .contact-grid { grid-template-columns: 1fr; }
+    .skill-row { grid-template-columns: 1fr; gap: 4px; }
+    .startup-hero { padding: 32px 24px; }
+    .startup-hero h2 { font-size: 26px; }
+    .exp-header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Prashant Singh Baghel</div>
+  <ul class="nav-links">
+    <li><a onclick="show('home')" class="active" id="tab-home">Home</a></li>
+    <li><a onclick="show('experience')" id="tab-experience">Experience</a></li>
+    <li><a onclick="show('projects')" id="tab-projects">Projects</a></li>
+    <li><a onclick="show('contact')" id="tab-contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ========== HOME ========== -->
+<section id="home" class="active">
+  <div class="home-hero">
+    <div>
+      <h4>Security &amp; Open Source Consultant · Mumbai, India</h4>
+      <h1>Prashant<br>Singh Baghel</h1>
+      <p class="home-intro">
+        8+ years helping organisations secure their software supply chains, manage open source risk, and build compliance programs that actually work. Certified ISO 27001 Lead Auditor. Builder of AI-powered compliance tools. Former EV startup founder.
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
+        <span class="tag">SCA</span>
+        <span class="tag">FOSS Compliance</span>
+        <span class="tag">ISO 5230:2020</span>
+        <span class="tag">ISO 27001 LA</span>
+        <span class="tag navy">DevSecOps</span>
+        <span class="tag navy">SBOM</span>
+        <span class="tag navy">OSPO</span>
+        <span class="tag navy">AI Tooling</span>
+      </div>
+    </div>
+    <img src="photo.jpeg" alt="Prashant Singh Baghel" class="home-photo" onerror="this.style.display='none'">
+  </div>
+
+  <div class="contact-bar">
+    <a href="mailto:b.prashant644@gmail.com">✉ b.prashant644@gmail.com</a>
+    
+    <a href="https://www.linkedin.com/in/prashant-singh-baghel-60499875/" target="_blank">🔗 LinkedIn</a>
+    <a href="https://github.com/bprashant644" target="_blank">⌥ GitHub</a>
+    <a href="https://sourcecodecontrol.com" target="_blank">🏢 Source Code Control</a>
+  </div>
+
+  <hr class="rule">
+
+  <h2>What I Do</h2>
+  <div class="expertise-grid">
+    <div class="expertise-card">
+      <span class="icon">🔍</span>
+      <h3>SCA &amp; Open Source Audits</h3>
+      <p>M&amp;A due diligence, investor audits, and internal reviews. License, security, and operational risk identification across codebases.</p>
+    </div>
+    <div class="expertise-card">
+      <span class="icon">🏛</span>
+      <h3>OSPO &amp; Governance</h3>
+      <p>End-to-end OSPO setup, ISO 5230:2020 compliance programs, maturity assessments, and open source policy frameworks.</p>
+    </div>
+    <div class="expertise-card">
+      <span class="icon">🛡</span>
+      <h3>Application Security</h3>
+      <p>SAST, DAST, and SCA tool implementation, DevSecOps pipeline integration, ISO 27001 audits, and security policy development.</p>
+    </div>
+    <div class="expertise-card">
+      <span class="icon">🤖</span>
+      <h3>AI-Powered Compliance Tools</h3>
+      <p>Building tools that use AI to automate governance tasks — policy creation, dependency analysis, and compliance reporting.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <p style="font-size:14px;color:var(--soft);text-align:center;">Currently at <strong style="color:var(--navy)">Source Code Control</strong> · Previously <strong style="color:var(--navy)">Ernst &amp; Young</strong> · <strong style="color:var(--navy)">TCS</strong></p>
+</section>
+
+<!-- ========== EXPERIENCE ========== -->
+<section id="experience">
+  <h4>Work History &amp; Entrepreneurial Journey</h4>
+  <h2>Experience</h2>
+  <p style="color:var(--soft);font-size:14px;margin-bottom:28px;">Click any role to expand details.</p>
+
+  <div class="section-label">Professional</div>
+
+  <!-- SCC -->
+  <div class="collapsible open">
+    <div class="collapsible-header" onclick="toggle(this)">
+      <div class="collapsible-left">
+        <span class="collapsible-company">Source Code Control (SCC)</span>
+        <div class="collapsible-meta">
+          <span class="collapsible-title">Senior Consultant — Application &amp; Information Security</span>
+          <span class="collapsible-date">Sep 2023 — Present · Mumbai</span>
+        </div>
+      </div>
+      <div class="collapsible-right">
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="collapsible-body">
+      <ul>
+        <li>Lead SCA-driven open source compliance and security engagements; conduct code and open source audits for M&amp;A, investor requirements, and internal reviews</li>
+        <li>Deliver structured audit findings covering license obligations, vulnerable dependencies, supply chain exposure, and operational issues; manage SBOM generation for product releases</li>
+        <li>Implement and integrate SCA and SAST tools into DevSecOps pipelines for continuous, automated checks</li>
+        <li>Built and co-developed OSPO Hub (AI-powered OSS governance) and ORbiT8 (SCA platform) — both used for policy creation, package usage clarity, and enterprise open source risk management</li>
+        <li>Developed EU CRA and ISO 5230:2020 Maturity Assessment framework based on CMMI principles; deployed across multiple client engagements</li>
+        <li>ISO 27001 Lead Auditor; contribute to security policy development; familiar with NIST and CIS v8 frameworks; support client gap assessments and audit readiness</li>
+        <li>Conduct tool-based vulnerability assessments using DAST tools; working knowledge of IAM, cryptographic controls, and SIEM platforms</li>
+        <li>Lead business development activities — outreach campaigns, client engagement, and pipeline management across India and APAC</li>
+        <li>Deliver security and compliance awareness programs for AppSec teams, developers, and management</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EY -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggle(this)">
+      <div class="collapsible-left">
+        <span class="collapsible-company">Ernst &amp; Young (EY)</span>
+        <div class="collapsible-meta">
+          <span class="collapsible-title">Senior Consultant</span>
+          <span class="collapsible-date">Jul 2020 — Sep 2023 · Bangalore</span>
+        </div>
+      </div>
+      <div class="collapsible-right">
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="collapsible-body">
+      <ul>
+        <li>Helped enterprise clients build their entire FOSS Compliance practice from scratch; established governance frameworks aligned to ISO 5230:2020</li>
+        <li>Conducted source code audits using SCA tools to identify license conflicts, security vulnerabilities, and operational issues</li>
+        <li>Created ISO 5230:2020 maturity assessments; tracked progress and built program improvement roadmaps</li>
+        <li>Developed FOSS compliance awareness content for developer teams, AppSec functions, and business stakeholders</li>
+        <li>Worked on publisher licenses as part of the Software Asset Management team; handled SAM audits and managed publisher contracts</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TCS -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggle(this)">
+      <div class="collapsible-left">
+        <span class="collapsible-company">Tata Consultancy Services (TCS)</span>
+        <div class="collapsible-meta">
+          <span class="collapsible-title">Assistant System Engineer</span>
+          <span class="collapsible-date">Nov 2014 — Jun 2016 · Chennai</span>
+        </div>
+      </div>
+      <div class="collapsible-right">
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="collapsible-body">
+      <ul>
+        <li>Collected business requirements, verified offers on test servers, and implemented changes using PEGA platform</li>
+        <li>Tracked and reported on customer experience metrics for client analysis and forecasting</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:40px;">Entrepreneurial Journey</div>
+
+  <!-- VERT MOTORS -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggle(this)">
+      <div class="collapsible-left">
+        <span class="collapsible-company">Vert Motors</span>
+        <div class="collapsible-meta">
+          <span class="collapsible-title">Co-Founder &amp; Director</span>
+          <span class="collapsible-date">2015 — 2017 · Indore &nbsp;·&nbsp; 🏆 ET Catapult Top 8</span>
+        </div>
+      </div>
+      <div class="collapsible-right">
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="collapsible-body">
+      <div style="padding-top:20px;">
+        <div class="startup-hero" style="margin-bottom:28px;">
+          <h2>Vert Motors</h2>
+          <p class="tagline">Building electric two-wheelers before it was obvious — Indore, India</p>
+          <span class="startup-badge">🏆 Economic Times Catapult · Top 8 Finalist</span>
+        </div>
+        <div class="startup-grid" style="margin-bottom:28px;">
+          <div class="stat-card"><span class="stat-number">2</span><p class="stat-label">Full-size working prototypes built</p></div>
+          <div class="stat-card"><span class="stat-number">Top 8</span><p class="stat-label">ET Catapult out of hundreds of entries</p></div>
+          <div class="stat-card"><span class="stat-number">7–10</span><p class="stat-label">Team size at peak</p></div>
+          <div class="stat-card"><span class="stat-number">~2yrs</span><p class="stat-label">Of nights, weekends, and conviction</p></div>
+        </div>
+        <p>In 2015, electric vehicles in India were not a market — they were a bet. Ather Energy was just getting started. The major OEMs were not paying attention. A team of engineers in Indore decided to build a full-size electric two-wheeler from scratch, on bootstrapped money, testing prototypes during late nights.</p>
+        <br>
+        <div class="callout">"We built something that actually moved. A full-sized electric moped with a working outer design, tested on real roads. Not a concept. Not a render. A real vehicle."</div>
+        <h3 style="margin:28px 0 16px;font-size:16px;color:var(--navy);">How Far We Got</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-year">2015</div>
+            <h3>Founded Vert Motors</h3>
+            <p>Team of 7–10 engineers. Clear vision — an affordable, practical electric moped for Indian urban roads.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2016</div>
+            <h3>First Working Prototype</h3>
+            <p>Built the first full-size working prototype. Outer design completed. Tested during nights to avoid traffic.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2016</div>
+            <h3>Economic Times Catapult — Top 8</h3>
+            <p>Made it through two rounds to the final 8 out of hundreds of entries. Pitched to investors and industry leaders on a national stage.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2017</div>
+            <h3>Second Prototype &amp; Fundraising Push</h3>
+            <p>Completed a second prototype. Engaged investors. Despite ET Catapult recognition, could not close a funding round. Bootstrapped money ran out.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2017</div>
+            <h3>Wound Down</h3>
+            <p>Without funding, the team could not continue. The market Vert was building for is now worth billions. Ather, Ola Electric, and others proved the thesis right. We were early and underfunded.</p>
+          </div>
+        </div>
+        <h3 style="margin:28px 0 8px;font-size:16px;color:var(--navy);">See It in Action</h3>
+        <p style="margin-bottom:16px;">The prototype filmed during testing. This is the real thing.</p>
+        <div class="video-embed">
+          <iframe src="https://www.youtube-nocookie.com/embed/FpxZ_0Eld5I?rel=0&modestbranding=1" title="Vert Motors Prototype" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="callout" style="margin-top:24px;">What I took from Vert Motors: how to build something real with almost nothing, how to pitch under pressure, and that being early is not the same as being wrong.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="rule">
+  <div class="skills-section">
+    <h2>Skills</h2>
+    <div class="skill-row"><span class="skill-label">SCA &amp; FOSS</span><span class="skill-value">Revenera Code Insight, Mend.io, Snyk, ScanOSS, ScanCode, ORT, Syft, Fossology, Sonatype Nexus</span></div>
+    <div class="skill-row"><span class="skill-label">AppSec</span><span class="skill-value">SAST, DAST, VAPT (tool-based), ZAP, BurpSuite, NMAP, Metasploit, OWASP Top 10, SBOM</span></div>
+    <div class="skill-row"><span class="skill-label">Frameworks</span><span class="skill-value">ISO 27001 LA, ISO 5230:2020, ISO 19770-1, EU CRA, NIST SSDF · Working knowledge: NIST, CIS v8</span></div>
+    <div class="skill-row"><span class="skill-label">Governance</span><span class="skill-value">OSPO setup, OSS policy development, maturity assessments (CMMI-based), supply chain security</span></div>
+    <div class="skill-row"><span class="skill-label">AI &amp; Automation</span><span class="skill-value">Python + OpenAI/Anthropic APIs, Lovable (no-code AI builder), AI-assisted compliance tooling</span></div>
+    <div class="skill-row"><span class="skill-label">OSS Products</span><span class="skill-value">OSPO Hub (AI-powered OSS governance), ORbiT8 (SCA platform)</span></div>
+    <div class="skill-row"><span class="skill-label">Concepts</span><span class="skill-value">IAM, Cryptography fundamentals, PKI, SIEM platforms, Threat Intelligence</span></div>
+    <div class="skill-row"><span class="skill-label">Other</span><span class="skill-value">Python scripting, MS Power Apps, Excel/PowerPoint, DevSecOps pipelines</span></div>
+  </div>
+
+  <hr class="rule">
+  <h2>Education &amp; Certifications</h2>
+  <div class="exp-item" style="margin-bottom:24px;padding-bottom:24px;">
+    <div class="exp-header">
+      <span class="exp-company" style="font-size:16px;">T. A. Pai Management Institute, Manipal</span>
+      <span class="exp-date">2018 — 2020</span>
+    </div>
+    <div class="exp-title">Post Graduate Diploma in Management · GPA 6.2/10</div>
+  </div>
+  <div class="exp-item" style="margin-bottom:24px;padding-bottom:24px;">
+    <div class="exp-header">
+      <span class="exp-company" style="font-size:16px;">Sushila Devi Bansal College of Technology (RGPV)</span>
+      <span class="exp-date">2010 — 2014</span>
+    </div>
+    <div class="exp-title">Bachelor of Engineering · GPA 7.28/10</div>
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;">
+    <span class="tag navy">ISO 27001 Lead Auditor</span>
+    <span class="tag navy">Microsoft Azure Fundamentals (AZ-900)</span>
+  </div>
+</section>
+
+<!-- ========== PROJECTS ========== -->
+<section id="projects">
+  <h4>What I'm Building</h4>
+  <h2>Projects</h2>
+
+  <p>A mix of professional tools built at Source Code Control and personal side projects. All leverage AI, open source tooling, or both.</p>
+
+  <hr class="rule">
+
+  <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--soft);margin-bottom:16px;">Professional · Source Code Control</h3>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-type">OSS Governance · AI</span>
+      </div>
+      <h3>OSPO Hub</h3>
+      <p>The unified OSPO platform for policy creation, compliance tracking, SBOM management, and open source governance. OSPO Hub uses AI to help organisations create and maintain open source policies, get clarity on package usage, and track compliance posture across their entire software portfolio — all from a single platform.</p>
+      <p style="font-size:13px;margin-top:8px;">Key capabilities: AI-driven policy engine, SBOM ingestion and management, compliance tracking dashboards, open source license risk visibility, and governance workflow automation.</p>
+      <div style="margin-top:12px;">
+        <span class="tag">AI Policy Engine</span>
+        <span class="tag">SBOM Management</span>
+        <span class="tag">Compliance Tracking</span>
+        <span class="tag">OSS Governance</span>
+        <span class="tag">OSPO</span>
+      </div>
+      <a href="https://ospohub.com" target="_blank" class="project-link">Visit OSPO Hub →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-type">SCA Platform · Open Source</span>
+      </div>
+      <h3>ORbiT8</h3>
+      <p>An enterprise SCA platform built on top of ORT (OSS Review Toolkit), a widely-used open source project for software composition analysis. ORbiT8 brings together all the components of the ORT ecosystem — analyser, scanner, advisor, reporter — into a single pane of glass, with an insight-driven dashboard that makes open source risk actionable for engineering and compliance teams.</p>
+      <p style="font-size:13px;margin-top:8px;">Built to remove the complexity of running ORT at scale, while adding the visibility layer that enterprises actually need.</p>
+      <div style="margin-top:12px;">
+        <span class="tag">ORT</span>
+        <span class="tag">SCA</span>
+        <span class="tag">DevSecOps</span>
+        <span class="tag">Open Source Risk</span>
+        <span class="tag">Dashboard</span>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="rule">
+
+  <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--soft);margin-bottom:16px;">Personal Projects</h3>
+  <div class="projects-grid">
+
+    <div class="project-card navy">
+      <div class="project-meta">
+        <span class="project-type">Finance · Python</span>
+      </div>
+      <h3>Stock Watchdog</h3>
+      <p>A personal finance tool for the Indian stock market. Tracks NSE/BSE data, applies technical indicators to identify entry and exit signals, and automates GTT (Good Till Triggered) order creation. Built in Python with desktop notifications.</p>
+      <div style="margin-top:12px;">
+        <span class="tag navy">Python</span>
+        <span class="tag navy">NSE/BSE</span>
+        <span class="tag navy">Technical Analysis</span>
+      </div>
+    </div>
+
+    <div class="project-card navy">
+      <div class="project-meta">
+        <span class="project-type">Social · AI</span>
+      </div>
+      <h3>A Good Life</h3>
+      <p>A social media platform built to inspire positive action. Users log and track good deeds, creating an authentic and verifiable record of noble efforts and community contributions. Built with Lovable and AI-assisted content features.</p>
+      <div style="margin-top:12px;">
+        <span class="tag navy">Lovable</span>
+        <span class="tag navy">AI</span>
+        <span class="tag navy">Social Impact</span>
+      </div>
+    </div>
+
+    <div class="project-card navy">
+      <div class="project-meta">
+        <span class="project-type">AppSec · Open Source</span>
+      </div>
+      <h3>Project Ephemeral</h3>
+      <p>An all-in-one application security platform being built entirely on open source tools. The goal is to consolidate SAST, SCA, DAST, and reporting into a single unified workflow — removing the need for expensive commercial AppSec tooling.</p>
+      <div style="margin-top:12px;">
+        <span class="tag navy">SAST</span>
+        <span class="tag navy">SCA</span>
+        <span class="tag navy">DAST</span>
+        <span class="tag navy">Open Source</span>
+      </div>
+    </div>
+
+    <div class="project-card navy">
+      <div class="project-meta">
+        <span class="project-type">Education · Django</span>
+      </div>
+      <h3>School ERP System</h3>
+      <p>A Django-based school management platform being built for a K-12 institution. Features student records, fee management, attendance tracking, WhatsApp integration for parent communication, and UPI payment support. Potential SaaS play for Indian schools.</p>
+      <div style="margin-top:12px;">
+        <span class="tag navy">Django</span>
+        <span class="tag navy">Python</span>
+        <span class="tag navy">WhatsApp API</span>
+        <span class="tag navy">UPI</span>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="rule">
+
+  <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--soft);margin-bottom:16px;">Engineering · College</h3>
+  <div class="projects-grid">
+
+    <div class="project-card" style="grid-column: 1 / -1;">
+      <div class="project-meta">
+        <span class="project-type">Baja SAE India · 2013 &amp; 2014</span>
+      </div>
+      <h3>Baja SAE India — ATV Design &amp; Racing</h3>
+      <p>As part of a 25-member engineering team from Sushila Devi Bansal College of Technology (RGPV), participated in Baja SAE India in both 2013 and 2014 — one of India's most competitive inter-collegiate engineering competitions organised by SAE India and supported by Mahindra &amp; Mahindra.</p>
+      <p style="font-size:14px;margin-top:8px;">The competition challenged teams to design, fabricate, and race a single-seater off-road All Terrain Vehicle (ATV) from scratch, competing against over 100 colleges across India. Vehicles were evaluated on engineering design, cost analysis, and real-world performance — including acceleration runs, maneuverability tests, and a gruelling 4-hour endurance race over rough off-road terrain.</p>
+      <p style="font-size:14px;margin-top:8px;">Built two ATVs across the two years. Served as the <strong>driver of the vehicle</strong> during the dynamic events — putting the team's engineering decisions to the test on track, under pressure, against the best student teams in the country.</p>
+      <div style="margin-top:14px;">
+        <span class="tag navy">ATV Design</span>
+        <span class="tag navy">Fabrication</span>
+        <span class="tag navy">Endurance Racing</span>
+        <span class="tag navy">Team of 25</span>
+        <span class="tag navy">SAE India</span>
+        <span class="tag navy">Mahindra</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== STARTUP STORY ========== -->
+<section id="startup">
+  <h4>2015 — 2017</h4>
+
+  <div class="startup-hero">
+    <h2>Vert Motors</h2>
+    <p class="tagline">Building electric two-wheelers before it was obvious — Indore, India</p>
+    <span class="startup-badge">🏆 Economic Times Catapult · Top 8 Finalist</span>
+  </div>
+
+  <div class="startup-grid">
+    <div class="stat-card">
+      <span class="stat-number">2</span>
+      <p class="stat-label">Full-size working prototypes built</p>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">Top 8</span>
+      <p class="stat-label">ET Catapult out of hundreds of entries</p>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">7–10</span>
+      <p class="stat-label">Team size at peak</p>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">~2yrs</span>
+      <p class="stat-label">Of nights, weekends, and conviction</p>
+    </div>
+  </div>
+
+  <h2>The Story</h2>
+  <p>In 2015, electric vehicles in India were not a market — they were a bet. Ather Energy was just getting started. The major OEMs were not paying attention. And a small team of engineers in Indore decided to build a full-size electric two-wheeler from scratch, on bootstrapped money, testing prototypes during late nights in a makeshift workshop.</p>
+
+  <p>That was Vert Motors.</p>
+
+  <div class="callout">
+    "We built something that actually moved. A full-sized electric moped with a working outer design, tested on real roads. Not a concept. Not a render. A real vehicle."
+  </div>
+
+  <h2 style="margin-top:32px;">How Far We Got</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">2015</div>
+      <h3>Founded Vert Motors</h3>
+      <p>Team of 7–10 engineers. Started with a clear product vision — affordable, practical electric moped for Indian urban roads.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2016</div>
+      <h3>First Working Prototype</h3>
+      <p>Built the first full-size working prototype. Outer design completed. Tested during nights to avoid traffic and attention.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2016</div>
+      <h3>Economic Times Catapult — Top 8</h3>
+      <p>Applied to ET Catapult, one of India's most competitive startup competitions. Made it through two rounds to the final 8 out of hundreds of entries. Pitched to investors and industry leaders on a national stage.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2017</div>
+      <h3>Second Prototype &amp; Fundraising Push</h3>
+      <p>Completed a second prototype. Engaged potential investors. Despite the ET Catapult recognition, could not close a funding round. Bootstrapped money ran out.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2017</div>
+      <h3>Wound Down</h3>
+      <p>Without funding, the team could not continue. Vert Motors shut down. The market Vert was building for — affordable Indian EVs — is now worth billions. Ather, Ola Electric, and others proved the thesis right. We were just early and underfunded.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <h2>See It in Action</h2>
+  <p>The prototype in action, filmed during testing. This is the real thing.</p>
+  <div class="video-embed">
+    <iframe 
+      src="https://www.youtube-nocookie.com/embed/FpxZ_0Eld5I?rel=0&modestbranding=1" 
+      title="Vert Motors Prototype"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="callout">
+    What I took from Vert Motors: how to build something real with almost nothing, how to pitch under pressure, and that being early is not the same as being wrong.
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section id="contact">
+  <h4>Get In Touch</h4>
+  <h2>Contact</h2>
+
+  <p>Open to conversations about open source compliance, security consulting, tool partnerships, and interesting problems in the software supply chain space.</p>
+
+  <div class="contact-grid">
+    <a href="mailto:b.prashant644@gmail.com" class="contact-card">
+      <span class="icon">✉️</span>
+      <h3>Email</h3>
+      <p>b.prashant644@gmail.com</p>
+    </a>
+    <a href="mailto:prashant.singh.baghel@sourcecodecontrol.com" class="contact-card">
+      <span class="icon">🏢</span>
+      <h3>Work Email</h3>
+      <p>prashant.singh.baghel@sourcecodecontrol.com</p>
+    </a>
+    <a href="https://www.linkedin.com/in/prashant-singh-baghel-60499875/" target="_blank" class="contact-card">
+      <span class="icon">🔗</span>
+      <h3>LinkedIn</h3>
+      <p>Connect with me</p>
+    </a>
+    <a href="https://github.com/bprashant644" target="_blank" class="contact-card">
+      <span class="icon">⌥</span>
+      <h3>GitHub</h3>
+      <p>bprashant644</p>
+    </a>
+    <a href="https://sourcecodecontrol.com" target="_blank" class="contact-card">
+      <span class="icon">🏢</span>
+      <h3>Source Code Control</h3>
+      <p>Where I currently work</p>
+    </a>
+    <a href="https://ospohub.com" target="_blank" class="contact-card">
+      <span class="icon">🌐</span>
+      <h3>OSPO Hub</h3>
+      <p>ospohub.com</p>
+    </a>
+  </div>
+
+  <div class="contact-note">
+    <h2>Based in Mumbai</h2>
+    <p>Available for consulting engagements, speaking, and advisory roles across India and remotely.</p>
+  </div>
+</section>
+
+<script>
+  function show(tab) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggle(header) {
+    const item = header.closest('.collapsible');
+    item.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
